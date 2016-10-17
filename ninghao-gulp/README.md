@@ -8,6 +8,8 @@
 
 - [基础](#基础)
 
+- [插件](#插件)
+
 ## 准备
 
 - 安装 gulp 命令行工具
@@ -61,5 +63,35 @@
     - `images/**/*`: 与上面一个的不同，不在乎目录的级数
 
 - 多个 globs
+
+    - `gulp.src(['xml/*.xml', 'json/*.json']).pipe(gulp.dest('dist/data'));`
+
+- 排除
+
+    - `gulp.src(['xml/*.xml', 'json/*.json', '!json/secret-*.json']).pipe(gulp.dest('dist/data'));`
+
+- 主任务
+
+    - 代码如下：
+
+            gulp.task('build', ['copy-index', 'images', 'data'], function() {
+                console.log('编译成功！');
+            })
+
+- 文件有变化时自动执行任务
+
+    - 代码如下：
+
+            gulp.watch('index.html', ['copy-index']);
+
+            gulp.watch('images/**/*.{jpg,png}', ['images']);
+
+            gulp.watch(['xml/*.xml', 'json/*.json', '!json/secret-*.json'], ['data']);
+
+## 插件
+
+- 插件
+
+- 编译 Sass：gulp-sass
 
     - 
