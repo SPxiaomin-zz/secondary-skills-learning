@@ -94,4 +94,70 @@
 
 - 编译 Sass：gulp-sass
 
-    - 
+        const sass = require('gulp-sass');
+
+        gulp.src('stylesheets/**/*.scss')
+            .pipe(sass())
+            .pipe(gulp.dest('dist/css'));
+
+- 编译 Less：gulp-less
+
+        const less = require('gulp-less');
+
+        gulp.src('stylesheets/**/*.less')
+            .pipe(less())
+            .pipe(gulp.dest('dist/css/less'));
+
+- 创建本地服务器：gulp-connect
+
+        const connect = require('gulp-connect');
+
+        gulp.task('server', function() {
+            connect.server({
+                root: 'dist'
+            });
+        });
+
+- 实时预览
+
+        const connect = require('gulp-connect');
+
+        gulp.task('server', function() {
+            connect.server({
+                root: 'dist',
+                livereload: true
+            });
+        });
+
+        gulp.task('copy-index', function() {
+            return gulp.src('index.html')
+                .pipe(gulp.dest('dist'))
+                .pipe(connect.reload());
+        });
+
+        gulp.task('watch', function() {
+            gulp.watch('index.html', ['copy-index']);
+        });
+
+        gulp.task('default', ['server', 'watch']);
+
+- 合并文件：gulp-concat
+
+        const concat = require('gulp-concat');
+
+        gulp.task('scripts', function() {
+            return gulp.src(['javascripts/jquery.js', 'javascripts/modernizr.js'])
+                .pipe(concat('vendor.js'))
+                .pipe(gulp.dest('dist/js'));
+        });
+
+- 最小化 js 文件：gulp-uglify
+
+        const uglify = require('gulp-uglify');
+
+        gulp.task('scripts', function() {
+            return gulp.src(['javascripts/jquery.js', 'javascripts/modernizr.js'])
+                .pipe(concat('vendor.js'))
+                .pipe(uglify())
+                .pipe(gulp.dest('dist/js'));
+        });

@@ -1,8 +1,28 @@
 const gulp = require('gulp');
+const sass = require('gulp-sass');
+const less = require('gulp-less');
+const connect = require('gulp-connect');
+const concat = require('gulp-concat');
+const uglify = require('gulp-uglify');
+
+gulp.task('scripts', function() {
+    return gulp.src(['javascripts/jquery.js', 'javascripts/modernizr.js'])
+        .pipe(concat('vendor.js'))
+        .pipe(uglify())
+        .pipe(gulp.dest('dist/js'));
+});
+
+gulp.task('server', function() {
+    connect.server({
+        root: 'dist',
+        livereload: true
+    });
+});
 
 gulp.task('copy-index', function() {
     return gulp.src('index.html')
-        .pipe(gulp.dest('dist'));
+        .pipe(gulp.dest('dist'))
+        .pipe(connect.reload());
 });
 
 gulp.task('images', function() {
@@ -24,3 +44,17 @@ gulp.task('watch', function() {
     gulp.watch('images/**/*.{jpg,png}', ['images']);
     gulp.watch(['xml/*.xml', 'json/*.json', '!json/secret-*.json'], ['data']);
 });
+
+gulp.task('sass', function()  {
+    return gulp.src('stylesheets/**/*.scss')
+        .pipe(sass())
+        .pipe(gulp.dest('dist/css'));
+});
+
+gulp.task('less', function()  {
+    return gulp.src('stylesheets/**/*.less')
+        .pipe(less())
+        .pipe(gulp.dest('dist/css/less'));
+});
+
+gulp.task('default', ['server', 'watch']);
