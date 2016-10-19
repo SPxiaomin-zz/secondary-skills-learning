@@ -161,3 +161,37 @@
                 .pipe(uglify())
                 .pipe(gulp.dest('dist/js'));
         });
+
+- 重命名文件：gulp-rename
+
+        const rename = require('gulp-rename');
+
+        gulp.task('scripts', function() {
+            return gulp.src(['javascripts/jquery.js', 'javascripts/modernizr.js'])
+                .pipe(concat('vendor.js'))
+                .pipe(gulp.dest('dist/js'))
+                .pipe(uglify())
+                .pipe(rename('vendor.min.js'))
+                .pipe(gulp.dest('dist/js'));
+        });
+
+- 最小化 css 文件：gulp-minify-css
+
+        const minifyCSS = require('gulp-minify-css');
+
+        gulp.task('less', function()  {
+            return gulp.src('stylesheets/**/*.less')
+                .pipe(less())
+                .pipe(minifyCSS())
+                .pipe(gulp.dest('dist/css/less'));
+        });
+
+- 最小化图像：gulp-imagemin
+
+        const imagemin = require('gulp-imagemin');
+
+        gulp.task('images', function() {
+            return gulp.src('images/**/*')
+                .pipe(imagemin())
+                .pipe(gulp.dest('dist/images'));
+        });

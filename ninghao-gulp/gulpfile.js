@@ -4,11 +4,16 @@ const less = require('gulp-less');
 const connect = require('gulp-connect');
 const concat = require('gulp-concat');
 const uglify = require('gulp-uglify');
+const rename = require('gulp-rename');
+const minifyCSS = require('gulp-minify-css');
+const imagemin = require('gulp-imagemin');
 
 gulp.task('scripts', function() {
     return gulp.src(['javascripts/jquery.js', 'javascripts/modernizr.js'])
         .pipe(concat('vendor.js'))
+        .pipe(gulp.dest('dist/js'))
         .pipe(uglify())
+        .pipe(rename('vendor.min.js'))
         .pipe(gulp.dest('dist/js'));
 });
 
@@ -27,6 +32,7 @@ gulp.task('copy-index', function() {
 
 gulp.task('images', function() {
     return gulp.src('images/**/*')
+        .pipe(imagemin())
         .pipe(gulp.dest('dist/images'));
 });
 
@@ -54,6 +60,7 @@ gulp.task('sass', function()  {
 gulp.task('less', function()  {
     return gulp.src('stylesheets/**/*.less')
         .pipe(less())
+        .pipe(minifyCSS())
         .pipe(gulp.dest('dist/css/less'));
 });
 
