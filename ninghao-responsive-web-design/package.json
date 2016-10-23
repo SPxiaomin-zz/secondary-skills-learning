@@ -1,0 +1,16 @@
+{
+  "name": "ninghao-responsive-web-design",
+  "version": "1.0.0",
+  "description": "<http://ninghao.net/course/1002>",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "browser-sync": "^2.17.5",
+    "gulp": "^3.9.1",
+    "gulp-eslint": "^3.0.1"
+  }
+}
