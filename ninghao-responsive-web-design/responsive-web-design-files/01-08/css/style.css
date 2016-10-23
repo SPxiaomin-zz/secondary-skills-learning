@@ -8,7 +8,7 @@ h2{
   color: #eee;
 }
 
-@media ( max-device-height: 480px ){
+@media (max-device-height: 480px){
   body{
     background: #f3581a;
   }

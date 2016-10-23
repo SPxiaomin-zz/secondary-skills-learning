@@ -84,7 +84,7 @@
 
         - `设备`;
         - 值是先宽后高；
-        - 设备的宽高比值 `不会` 受到设置使用方向的影响；
+        - 设备的宽高比值 `不会` 受到设备使用方向的影响；
 
     - 支持 max & min；
 
@@ -100,6 +100,116 @@
 
     - 可选值: `landscape, protrait`；
 
+    - 示例代码：
+
+            @media (orientation: landscape) {
+                body {
+                    background: #27ae60;
+                }
+            }
+
+            @media (orientation: portrait) {
+                body {
+                    background: #f2cb2b;
+                }
+            }
+
 - height （可视窗口高度）与 device-height（设备高度）
 
     - 支持 max & min；
+    - 注意：
+
+        - `height` 会受到设备使用方向的影响，`device-height` 不会受到设备使用方向的影响；
+
+    - 示例代码：
+
+            @media (max-device-height: 480px) {
+                body {
+                    background: #f3581a;
+                }
+            }
+
+
+- width（可视窗口宽度） 与 device-width（设备宽度）
+
+    - 支持 max & min；
+    - 注意：
+
+        - `width` 会受到设备使用方向的影像，`device-width` 不会受到设备使用方向的影像；
+
+    - 示例代码：
+
+            @media (max-device-width: 767px) {
+                body {
+                    background: #c36cea;
+                }
+            }
+
+- resolution 像素密度
+
+    - 可以设置 max & min；
+
+    - 示例代码：
+
+            // 第2个媒体特性，是由于 safari 无法很好地识别 resolution 属性才特别设置的；
+            @media screen and ( resolution: 150dpi ), screen and ( -webkit-device-pixel-ratio: 1 ) {
+                body {
+                    background: #c0392b;
+                }
+            }
+
+            // dppx(dots per px)
+            // dppx 和 -webkit-device-pixel-ratio 效果是一样的，只不过 safari 只支持后者
+            @media screen and ( resolution: 1dppx ), screen and ( -webkit-device-pixel-ratio: 1 ) {
+                body {
+                    background: #c0392b;
+                }
+            }
+
+- 操作符 - and
+
+    - 连接的媒体查询都必须返回 `true`；
+
+    - 示例代码：
+
+            @media screen and (min-width: 480px) and (max-width: 767px) {
+                body {
+                    background: #27ae60;
+                }
+            }
+
+- 逗号分隔连接多个媒体查询
+
+    - 连接的媒体查询只要有一个返回 `true` 就可以了；
+
+    - 示例代码：
+
+            @media screen and (orientation: landscape), screen and (min-width: 700px) {
+                body {
+                    background: #c0392b;
+                }
+            }
+
+- 操作符 - not
+
+    - 对媒体查询的值取反之后再返回；
+    - 注意：
+
+        - `not` 的作用范围包括用 `and` 连接的所有媒体查询，但是 `只` 包括用 `or` 连接的媒体查询它所在的那一部分；
+        - `必须` 明确指定一个媒体类型；
+
+    - 示例代码：
+
+            // 否定用 and 连接的两个媒体查询：先求两个媒体查询的返回值，再 not
+            @media not screen and (max-width:959px) {
+                body {
+                    background: #ccc;
+                }
+            }
+
+    - 操作符 only
+
+        - 作用：
+        - 注意：
+
+            - `必须` 指定媒体类型；
