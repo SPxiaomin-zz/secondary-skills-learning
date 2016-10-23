@@ -8,6 +8,8 @@
 
 - [媒体查询](#媒体查询)
 
+- [布局](#布局)
+
 ## 基础
 
 - viewport - 可视窗口
@@ -201,7 +203,8 @@
     - 示例代码：
 
             // 否定用 and 连接的两个媒体查询：先求两个媒体查询的返回值，再 not
-            @media not screen and (max-width:959px) {
+            // 即 not (screen and (max-width: 959px))
+            @media not screen and (max-width:959px ) {
                 body {
                     background: #ccc;
                 }
@@ -209,7 +212,13 @@
 
     - 操作符 only
 
-        - 作用：
+        - 作用： 用于防止老的不支持媒体查询的浏览器不读取余下的媒体查询，同时一并忽略链接的样式表；
         - 注意：
 
             - `必须` 指定媒体类型；
+
+## 布局
+
+- 响应式布局 1
+
+    - 
