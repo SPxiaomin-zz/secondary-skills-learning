@@ -14,6 +14,10 @@
 
 - [图像](#图像)
 
+- [幻灯片](#幻灯片)
+
+- [结束](#结束)
+
 ## 基础
 
 - viewport - 可视窗口
@@ -378,4 +382,53 @@
 
 - picturefill
 
-<!-- TODO: 看视频，0:50 http://ninghao.net/video/1034 -->
+        <div id="showcase">
+            <span data-picture data-alt="海狮">
+                <span data-src="../images/01.jpg"></span>
+                <span data-src="../images/01_s.jpg" data-media="(max-width:480px)"></span>
+                <span data-src="../images/01_s_2x.jpg" data-media="(max-width:480px) and (-webkit-min-device-pixel-ratio:2)"></span>
+            </span>
+        </div>
+
+## 幻灯片
+
+- 响应式幻灯片
+
+- 幻灯片的控制按钮
+
+- 幻灯片的控制按钮样式
+
+        // swipe.html
+        <div id="showcase">
+            <div id='slider' class='swipe'>
+                <div class='swipe-wrap'>
+                    <div><img src="../images/01.jpg" alt=""></div>
+                    <div><img src="../images/02.jpg" alt=""></div>
+                    <div><img src="../images/03.jpg" alt=""></div>
+                </div>
+                <div class="slider-control">
+                    <button class="left" onclick="mySwipe.prev()"><i class="icon-angle-left"></i></button>
+                    <button class="right" onclick="mySwipe.next()"><i class="icon-angle-right"></i></button>
+                </div>
+            </div>
+            <script>
+                window.mySwipe = Swipe(document.getElementById('slider'));
+            </script>
+        </div>
+
+- 修复幻灯片被覆盖的问题
+
+    - 由于 `后来居上` 的原则，同一层级中先前的元素会被后来的元素覆盖，可以通过 `z-index` 来修改层级，从而改变覆盖的顺序。
+
+## 结束
+
+- 结束语
+
+    - 响应式框架
+
+        - Bootstrap & Foundation
+
+    - 响应式灵感网站
+
+        - mediaqueri.es
+        - responsive.cn
