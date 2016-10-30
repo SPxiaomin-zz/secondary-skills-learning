@@ -12,6 +12,8 @@
 
 - [导航](#导航)
 
+- [图像](#图像)
+
 ## 基础
 
 - viewport - 可视窗口
@@ -277,5 +279,103 @@
 
 - 导航菜单的 CSS
 
-    -
-    <!-- TODO: http://ninghao.net/video/1026 视频 -->
+    - li 通过 `display: inline-block` 实现水平显示，并通过父元素 `ul` 继承 body `text-align: center` 来实现水平方向的居中效果；
+
+- 切换按钮的样式
+
+    - 两个按钮使用的都是绝对定位定位在同一个位置上面，然后根据 `后来居上` 的原则，`close` 按钮会覆盖 `open` 按钮。
+    - 首先隐藏了 `.close` 按钮，然后通过 `#nav:target` 来显示就可以了；
+
+- 响应式导航菜单的样式
+
+    - `#nav` 使用 `absolute` 之后，由于收缩性，所以要设置 `width: 100%`；
+
+## 图像
+
+- 响应式的图像
+
+    - 使用 img 插入的图片，图片如果过大的话，使用如下代码可以使其宽度为父容器的宽度：
+
+            // test.html
+            <div>
+                <img src="#">
+            </div>
+
+            // test.css
+            // img: 1366x768
+            img {
+                width: 100%;
+                max-width: 100%;
+            }
+
+    - 使用背景插入图片，
+
+            // test.html
+            <div></div>
+
+            // test.css
+            // img: 1366x768
+            // 下面的 background-size 只设置了一个值，根据定义，也就是只设置了width，height的值为auto，因此height的值是随着width按图片的比例进行缩放的，当可视窗口足够小的时候，父容器上下就会显示比较多的空白（下面有解决方案）。
+            div {
+                height: 500px;
+
+                background: url(test.jpg) 50% 50% no-repeat;
+                background-size: 100%;
+            }
+
+- 响应式的背景图像
+
+    - 上面使用背景图像插入图片时候出现空白的解决方案：
+
+            // test.html
+            <div></div>
+
+            // test.css
+            // img: 1366x768
+            // 下面的 background-size 只设置了一个值，根据定义，也就是只设置了width，height的值为auto，因此height的值是随着width按图片的比例进行缩放的，当可视窗口足够小的时候，父容器上下就会显示比较多的空白。
+            // 解决方案：768/1366 ≈ 0.56，根据上下 `padding` 的百分值相对于 `width` 计算的特性 & background-origin 的起始位置是 `padding-box`的特性，进而设置 `padding-top: 56%` 便可以解决问题了。
+            div {
+                padding-top: 56%;
+
+                background: url(test.jpg) 50% 50% no-repeat;
+                background-size: 100%;
+            }
+
+    - 上面的解决方案不是特别地灵活，当图片的比例发生了变化呢，是不是就要重新计算呢？多麻烦地事情啊！
+
+            // test.html
+            <div></div>
+
+            // test.css
+            // img: 1366x768
+            // cover 属性值会使得图片按比例缩放的同时填充满父容器
+            div {
+                padding-top: 56%;
+
+                background: url(test.jpg) 50% 50% no-repeat;
+                background-size: cover;
+            }
+
+- 不同尺寸的设备使用不同的图像
+
+    - 图片的像素越大，体积也就越大，载入的速度也就慢些，这样对于网速较慢的用户是会影像用户体验的。所以对于小尺寸屏幕的用户，可以使用比较小的图片。
+
+- 不同尺寸的设备使用不同的背景图像
+
+        @media (max-width: 480px) {
+            #showcase {
+                background-image: url(../../images/01_s.jpg);
+            }
+        }
+
+- 根据屏幕密度切换不同的背景图像
+
+        @media (max-width: 480px) and (min-resolution: 2dppx), (max-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
+            #showcase {
+                background-image: url( ../../images/01_s_2x.jpg);
+            }
+        }
+
+- picturefill
+
+<!-- TODO: 看视频，0:50 http://ninghao.net/video/1034 -->
