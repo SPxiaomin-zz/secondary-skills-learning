@@ -10,6 +10,8 @@
 
 - [布局](#布局)
 
+- [导航](#导航)
+
 ## 基础
 
 - viewport - 可视窗口
@@ -219,6 +221,61 @@
 
 ## 布局
 
-- 响应式布局 1
+- 响应式布局 1,2,3
 
-    - 
+    - 原理：
+
+        选定 `breakpoint` 进而设置相应的媒体查询；
+
+    - 示例代码：
+
+            @media (min-width: 1200px) {
+                .container {
+                    width: 1170px;
+                }
+
+                #mainbody {
+                    width: 770px;
+                    margin-right: 30px;
+                }
+
+                #sidebar {
+                    width: 370px;
+                }
+            }
+
+            @media (max-width: 959px) {
+                .container {
+                    width: 100%;
+                }
+
+                #mainbody {
+                    width: 67%;
+                }
+
+                #sidebar {
+                    width: 30%;
+                    float: right;
+                }
+            }
+
+            @media (max-width: 767px) {
+                #mainbody,
+                #sidebar {
+                    float: none;
+                    width: 100%;
+                }
+            }
+
+## 导航
+
+- 响应式导航
+
+    - `:hover` 在移动设备不管用，通过使用 `:target` & `id` 来实现点击；
+
+- 导航菜单的 HTML
+
+- 导航菜单的 CSS
+
+    -
+    <!-- TODO: http://ninghao.net/video/1026 视频 -->
